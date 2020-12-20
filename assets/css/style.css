@@ -1,0 +1,160 @@
+body{
+    background: url(../img/bg.png)
+}
+
+/**{
+    margin: 0px;
+    padding: 0px;
+}*/
+
+.float-l{
+    float: left;
+}
+
+.float-r{
+    float: right;
+}
+
+.grid-container{
+     display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.grid-container > div {
+  text-align: left;
+  padding: 20px 0;
+}
+
+.item1 {
+  grid-row: 1 / span 2;
+}
+
+.clearfix{
+    float: none;
+    clear: both;
+}
+
+.container{
+    width: 80%;
+    margin: 0px auto;
+    box-shadow: 0px 0px 10px gray;
+}
+
+.container > #header > #logo > img{
+    width: 50%;
+    height: 200px;
+    margin: 0px auto;
+    display: block;
+}
+.container > #header > #logo {
+    margin: 0px auto;
+    width: 60%;
+}
+
+.container > #header > #logo > h1{
+    text-align: center;
+}
+
+.btn{
+    display: inline-block;
+    padding: .8rem 2rem;
+    text-decoration: none;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    color: #fff;
+    margin: 4px;
+}
+
+.btn-primary{
+    background-color: #15538a;
+}
+.btn-success{
+    
+}
+
+/*.btn-container{
+    width: 25%;
+    margin: 0px auto;
+}*/
+
+.btn:hover{
+    box-shadow: 0px 0px 10px gray;
+}
+
+.btn-container { 
+  height: 63px;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  width: 61%;
+  top: 40%;
+  left: 64%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+table{
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+td{
+   border-top: 1px solid #ccc; 
+   padding: 2px;
+}
+
+form > .form-content > input{
+    display: block;
+    width: 12%;
+    height: 30px;
+    margin: 5px;
+    border-radius: .2rem;
+}
+
+.input{
+    display: block;
+    width: 12%;
+    height: 30px;
+    margin: 5px;
+    border-radius: .2rem;
+}
+
+form > .form-content{
+    padding: 5px;
+    margin: 2px;
+}
+
+.w-1{
+ width: 10% !important;   
+}
+
+.w-2{
+ width: 20% !important;      
+}
+
+
+.w-3{
+ width: 30% !important;
+}
+
+.w-7{
+ width: 70% !important;
+}
+
+.textarea{
+    width: 791px;
+    height: 67px;
+}
+
+.success{
+    background-color: green;
+}
+.error{
+    background-color: red;
+}
