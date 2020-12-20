@@ -74,16 +74,6 @@ class TicketController{
             $ticketResult = $ticket->getTicket();
             $claimType = new ClaimType();
             $claimTypeResults = $claimType->getAll();
-            /*$ticket->setId($ticketId);
-            $dataObject = [];*/
-            //array_push($dataObject,$ticket->getTicket());
-            //array_push($dataObject,$claimType->getAll());
-            /*var_dump($dataObject);
-            die();*/
-            //$ticketResult = $ticket->getTicket();
-            //$arrayObject->append($ticket->getTicket());
-            //$claimTypeResult = $claimType->getAll();
-            //$arrayObject->append($claimType->getAll());
             
             require_once 'views/ticket/create.php';  
          }else{
@@ -91,18 +81,50 @@ class TicketController{
          }
     }
     
-     public function editar(){
-        Utils::isAdmin();
-        if(isset($_GET['id'])){
-            $edit = true;          
-            $productId = $_GET['id'];
-            $producto = new Producto();
-            $producto->setId($productId);
-            $productResult = $producto->getProduct();
-            
-            require_once 'views/producto/crear.php';            
-        }else{
-            header('Location:'.base_url.'producto/gestion');
+    public function search(){
+         if(isset($_POST)){
+            $code = isset($_POST['search']) && $_POST['search'] !="" ? $_POST['search'] : false;
+            //$arrayObject = new ArrayObject();
+            $ticket = new Ticket();
+            if($code){
+                $ticket->setCode($code);
+                $tickets = $ticket->getTicketByCode();
+            }else{
+                $tickets = $ticket->getAll();
+            }
+            require_once 'views/ticket/index.php';
+         }
+    }
+    
+    public function update(){
+        if(isset($_GET['id']) && isset($_POST)){
+            $ticketId = isset($_GET['id']) ? $_GET['id'] : false;
+            $code = isset($_POST['code']) && $_POST['code'] > 0 ? $_POST['code'] : false;
+            $date = isset($_POST['date']) ? $_POST['date'] : false;
+            $recurrent = isset($_POST['recurrent']) ? $_POST['recurrent'] : false;
+            $identificationCard = isset($_POST['i-card']) ? $_POST['i-card']: false;
+            $claimTypeId = isset($_POST['claim_type']) ? $_POST['claim_type'] : false;            
+            $claimDescription = isset($_POST['claim_description']) ? $_POST['claim_description'] : false;            
+            //$imagen = isset($_POST['image']) ? $_POST['image'] : false;
+            if($code && $date && $recurrent && $identificationCard && $claimTypeId && $claimDescription && $ticketId){
+                $ticket = new Ticket();
+                $ticket->setId($ticketId);
+                $ticket->setCode($code);
+                $ticket->setDate($date);
+                $ticket->setRecurrent($recurrent);
+                $ticket->setClaim_description($claimDescription);
+                $ticket->setIdentification_card($identificationCard);
+                $ticket->setClaim_type_id($claimTypeId);
+                
+                $update = $ticket->update();
+                
+                if($update){
+                   $_SESSION['ticket'] = "OK"; 
+                }else{
+                    $_SESSION['ticket'] = "ERROR";
+                }
+                header("Location:".base_url.'ticket/index');
+            }
         }
     }
     

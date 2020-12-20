@@ -7,10 +7,10 @@
     <h1>Crear nuevo Ticket</h1>
     <?php $urlAction = base_url."ticket/save"?>
 <?php endif;?>
-    <form action="<?=$urlAction?>" method="POST" enctype="multipart/form-data">
+    <form action="<?=$urlAction?>" id="form-create" method="POST" enctype="multipart/form-data">
         <div class="form-content">
             <label for="name">Codigo del Ticket</label>
-            <input type="number" name="code" placeholder="Ingrese el numero de ticket" pattern="[0-9]+" value="<?=isset($ticketResult) && is_object($ticketResult) ? $ticketResult->code : ''?>">
+            <input type="number" name="code" placeholder="Ingrese el numero de ticket" min="0" pattern="[0-9]+" value="<?=isset($ticketResult) && is_object($ticketResult) ? $ticketResult->code : ''?>">
         </div>
         <div class="form-content">
             <label for="date">Fecha</label>

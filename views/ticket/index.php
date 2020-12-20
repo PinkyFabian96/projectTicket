@@ -1,13 +1,13 @@
 <?php
 require_once 'views/layout/header.php';
 ?>
-<?php if(isset($tickets)): ?>
+<?php if(isset($tickets) && $tickets->num_rows > 0): ?>
 <div class="container">
-<?php if(isset($_SESSION['ticket']) && $_SESSION['ticket'] == 'OK'): ?>
-    <strong class="success">El Ticket se ha creado correctamente</strong>
-<?php elseif(isset($_SESSION['ticket']) && $_SESSION['ticket'] == 'ERROR'): ?>
-     <strong class="error">El Ticket no ha podido crear, verifique los datos ingresados</strong>
-<?php endif; ?>
+    <?php if(isset($_SESSION['ticket']) && $_SESSION['ticket'] == 'OK'): ?>
+        <strong class="success">El Ticket se ha creado o actualizado correctamente</strong>
+    <?php elseif(isset($_SESSION['ticket']) && $_SESSION['ticket'] == 'ERROR'): ?>
+         <strong class="error">El Ticket no ha podido crear o actualizar, verifique los datos ingresados</strong>
+    <?php endif; ?>
 <?php Utils::deleteSession('ticket'); ?>
     <h1>Indice de Tickets</h1>
     <table>

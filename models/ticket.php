@@ -84,8 +84,8 @@ class Ticket{
         return $tickets;
     }
     
-        public function getTicket(){
-         try{
+    public function getTicket(){
+        try{
             $connectionDB = $this->db;
             $sql = "SELECT t.*, ct.claim_type_description FROM ticket t JOIN claim_type ct ON t.claim_type_id= ct.id WHERE t.id = {$this->getId()}";
             $ticket = $connectionDB->query($sql);
@@ -95,6 +95,19 @@ class Ticket{
         } finally {
             $connectionDB->close();
         }
+    }
+    
+    public function getTicketByCode(){
+        try{
+            $connectionDB = $this->db;
+            $sql = "SELECT t.*, ct.claim_type_description FROM ticket t JOIN claim_type ct ON t.claim_type_id= ct.id WHERE t.code = {$this->getCode()}";
+            $ticket = $connectionDB->query($sql);
+        } catch (Exception $ex) {
+
+        } finally {
+            $connectionDB->close();
+        }
+        return $ticket;         
     }
     
      public function save(){
@@ -117,8 +130,25 @@ class Ticket{
         return $result;     
     }
     
-    
-
+    public function update(){
+        try {
+            $connectionDB = $this->db;
+            $connectionDB->autocommit(FALSE);
+            $sql = "UPDATE ticket SET code = '{$this->getCode()}' ,date = '{$this->getDate()}', recurrent = '{$this->getRecurrent()}', claim_description = '{$this->getClaim_description()}', claim_type_id={$this->getClaim_type_id()}, ".
+                    " identification_card = '{$this->getIdentification_card()}' WHERE id = {$this->getId()}";
+            $result = false;
+            if($connectionDB->query($sql)){
+               $connectionDB->commit();
+               $result = true;
+            }
+            
+        } catch (Exception $ex) {
+            error_log($ex);
+        } finally {
+            $connectionDB->close();
+        }
+        return $result; 
+    }
     
 }
 
