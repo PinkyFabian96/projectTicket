@@ -59,6 +59,9 @@ class TicketController{
                 }
                 header("Location:".base_url.'ticket/index');
 
+            }else{
+                $_SESSION['ticket'] = "ERROR";
+                header("Location:".base_url.'ticket/index');
             }
         }
     
